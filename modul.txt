@@ -1,0 +1,97 @@
+========================================
+APLIKASI CATATAN KEUANGAN PRIBADI
+TECH STACK
+- Flutter
+- Database Lokal (Hive / SQLite)
+- Offline (Tanpa Backend)
+========================================
+
+MENU UTAMA
+----------
+
+1. Dashboard
+   - Ringkasan Saldo Saat Ini
+   - Total Uang Masuk Bulan Ini
+   - Total Uang Keluar Bulan Ini
+   - Pemasukan Terbesar Berdasarkan Kategori
+     (contoh: Kiriman dari Om)
+   - Pengeluaran Terbesar Berdasarkan Kategori
+     (contoh: Makan)
+   - Grafik Ringkas (Opsional)
+
+------------------------------------------------
+
+2. Input Pemasukan
+   - Input Tanggal
+   - Input Nominal Uang Masuk
+   - Pilih Kategori Pemasukan (Dropdown)
+     Contoh:
+     - Kiriman dari Om
+     - Gaji
+     - Bonus
+     - Hadiah
+   - Catatan (Opsional)
+   - Tombol Simpan Pemasukan
+
+------------------------------------------------
+
+3. Input Pengeluaran
+   - Input Tanggal
+   - Input Nominal Uang Keluar
+   - Pilih Kategori Pengeluaran (Dropdown)
+     Contoh:
+     - Makan
+     - Minum
+     - Transport
+     - Pulsa / Internet
+     - Hiburan
+   - Catatan (Opsional)
+   - Tombol Simpan Pengeluaran
+
+------------------------------------------------
+
+4. Riwayat Transaksi
+   - Daftar Semua Transaksi
+   - Filter:
+     - Semua
+     - Pemasukan
+     - Pengeluaran
+   - Urutkan Berdasarkan Tanggal
+   - Detail Transaksi
+   - Hapus / Edit Transaksi
+
+------------------------------------------------
+
+5. Laporan
+   - Pilih Bulan & Tahun
+   - Rekap Uang Masuk per Kategori
+   - Rekap Uang Keluar per Kategori
+   - Grafik Pengeluaran Berdasarkan Kategori
+   - Grafik Pemasukan Berdasarkan Kategori
+
+------------------------------------------------
+
+6. Kelola Kategori
+   - Kategori Pemasukan
+     - Tambah Kategori
+     - Edit Kategori
+     - Hapus Kategori
+   - Kategori Pengeluaran
+     - Tambah Kategori
+     - Edit Kategori
+     - Hapus Kategori
+
+------------------------------------------------
+
+7. Pengaturan
+   - Reset Data (Opsional)
+   - Backup Lokal (Export File) [Opsional]
+   - Tentang Aplikasi
+
+========================================
+CATATAN
+- Semua data tersimpan di HP
+- Tidak menggunakan backend
+- Tidak membutuhkan internet
+- Aplikasi digunakan untuk pribadi
+========================================
