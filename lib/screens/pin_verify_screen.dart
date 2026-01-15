@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../services/pin_service.dart';
+import '../services/user_service.dart';
 import '../widgets/pin_input_widget.dart';
 import '../widgets/custom/custom_notification.dart';
 import 'home_screen.dart';
+import 'profile_setup_screen.dart';
 
 class PinVerifyScreen extends StatefulWidget {
   const PinVerifyScreen({super.key});
@@ -13,6 +15,7 @@ class PinVerifyScreen extends StatefulWidget {
 
 class _PinVerifyScreenState extends State<PinVerifyScreen> {
   final PinService _pinService = PinService();
+  final UserService _userService = UserService();
   final GlobalKey<PinInputWidgetState> _pinInputKey = GlobalKey();
 
   bool _isLoading = false;
@@ -59,10 +62,18 @@ class _PinVerifyScreenState extends State<PinVerifyScreen> {
         type: NotificationType.success,
       );
 
-      // Navigate to home
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const HomeScreen()),
-      );
+      final hasProfile = await _userService.hasProfile();
+      if (!mounted) return;
+
+      if (hasProfile) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const HomeScreen()),
+        );
+      } else {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) => const ProfileSetupScreen()),
+        );
+      }
     } else if (mounted) {
       setState(() => _isLoading = false);
 

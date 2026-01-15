@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => TransactionProvider()),
       ],
       child: MaterialApp(
-        title: 'Dompet Linci',
+        title: 'DompetKu',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           // Blue + White + Gray Theme for feminine modern design

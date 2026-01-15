@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/transaction_provider.dart';
 import '../providers/category_provider.dart';
+import '../services/user_service.dart';
 import '../utils/currency_formatter.dart';
 import '../utils/date_formatter.dart';
 import 'add_income_screen.dart';
@@ -15,12 +17,16 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final UserService _userService = UserService();
   bool _isLoading = true;
   double _balance = 0.0;
   double _monthlyIncome = 0.0;
   double _monthlyExpense = 0.0;
   Map<String, dynamic>? _topIncomeCategory;
   Map<String, dynamic>? _topExpenseCategory;
+
+  String _userName = 'Linci Cantik';
+  String? _userImagePath;
 
   @override
   void initState() {
@@ -39,6 +45,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final categoryProvider =
         Provider.of<CategoryProvider>(context, listen: false);
 
+    // Load Profile
+    final profile = await _userService.getProfile();
+    final profileName = profile['name'];
+
     await categoryProvider.loadCategories();
     await transactionProvider.loadTransactions();
 
@@ -54,6 +64,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
         'expense', now.year, now.month);
 
     setState(() {
+      _userName = profileName ?? 'Linci Cantik';
+      _userImagePath = profile['image_path'];
       _balance = balance;
       _monthlyIncome = income;
       _monthlyExpense = expense;
@@ -68,7 +80,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Dompet Linci',
+          'Dashboard',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -91,20 +103,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     // Greeting Section
                     Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Hallo Linci Cantik 👋',
-                                style: TextStyle(
+                                'Hallo $_userName 👋',
+                                style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF2C3E50),
                                 ),
                               ),
-                              SizedBox(height: 4),
-                              Text(
+                              const SizedBox(height: 4),
+                              const Text(
                                 'Yuk catat keuanganmu hari ini!',
                                 style: TextStyle(
                                   fontSize: 14,
@@ -115,15 +127,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.all(8),
+                          width: 50,
+                          height: 50,
                           decoration: BoxDecoration(
                             color: const Color(0xFF5B9BD5).withAlpha(25),
                             shape: BoxShape.circle,
+                            border: Border.all(
+                              color: const Color(0xFF5B9BD5).withAlpha(50),
+                              width: 1.5,
+                            ),
+                            image: _userImagePath != null
+                                ? DecorationImage(
+                                    image: FileImage(File(_userImagePath!)),
+                                    fit: BoxFit.cover,
+                                  )
+                                : null,
                           ),
-                          child: const Icon(
-                            Icons.person_outline_rounded,
-                            color: Color(0xFF5B9BD5),
-                          ),
+                          child: _userImagePath == null
+                              ? const Icon(
+                                  Icons.person_outline_rounded,
+                                  color: Color(0xFF5B9BD5),
+                                )
+                              : null,
                         ),
                       ],
                     ),

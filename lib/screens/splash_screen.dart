@@ -121,7 +121,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                 // App Name
                 const Text(
-                  'Dompet Linci',
+                  'DompetKu',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,

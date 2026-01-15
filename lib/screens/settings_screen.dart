@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../database/database_helper.dart';
 import 'category_management_screen.dart';
+import 'profile_setup_screen.dart';
 import '../widgets/custom/custom_notification.dart';
 import '../widgets/custom/custom_dialog.dart';
 
@@ -50,6 +51,36 @@ class SettingsScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
+          // Profile Section
+          Text(
+            'Akun',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[600],
+              letterSpacing: 0.5,
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          _buildSettingItem(
+            icon: Icons.person_outline_rounded,
+            iconColor: const Color(0xFF5B9BD5),
+            title: 'Atur Profil',
+            subtitle: 'Ubah nama dan foto profil',
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      const ProfileSetupScreen(isEditing: true),
+                ),
+              );
+            },
+          ),
+
+          const SizedBox(height: 28),
+
           // Category Management Section
           Text(
             'Kategori',
@@ -117,11 +148,11 @@ class SettingsScreen extends StatelessWidget {
             icon: Icons.info_outlined,
             iconColor: const Color(0xFF5B9BD5),
             title: 'Tentang Aplikasi',
-            subtitle: 'Keuangan Linci v1.0.0',
+            subtitle: 'DompetKu v1.0.0',
             onTap: () {
               showAboutDialog(
                 context: context,
-                applicationName: 'Keuangan Linci',
+                applicationName: 'DompetKu',
                 applicationVersion: '1.0.0',
                 applicationIcon: const Icon(
                   Icons.account_balance_wallet_outlined,
